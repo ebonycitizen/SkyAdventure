@@ -25,7 +25,8 @@ public class EnemyCage : EnemyBase
     {
         //release chicken, check null
 
-
+        foreach (GameObject p in people)
+            p.layer = LayerMask.NameToLayer("People");
 
         Destroy(destructive);
     }

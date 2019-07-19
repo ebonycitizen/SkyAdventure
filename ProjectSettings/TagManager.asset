@@ -12,6 +12,7 @@ TagManager:
   - Transformer
   - People
   - Bullet
+  - Rescue
   layers:
   - Default
   - TransparentFX
