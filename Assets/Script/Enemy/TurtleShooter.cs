@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class TurtleShooter : MonoBehaviour
@@ -10,8 +11,13 @@ public class TurtleShooter : MonoBehaviour
 
     [SerializeField] private GameObject shotEffect;
 
-    public void Shoot()
+    [SerializeField] private Transform target;
+
+    [SerializeField] private float shotVelocity = 15f;
+
+    public void Shoot(GameObject _target)
     {
+        target = _target.transform;
         StartCoroutine(InShooting());
     }
 
@@ -22,6 +28,9 @@ public class TurtleShooter : MonoBehaviour
         GameObject shotPrehab = Instantiate(shot) as GameObject;
         shotPrehab.transform.position = shotPositionRef.position;
         Rigidbody rb = shotPrehab.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward*15, ForceMode.VelocityChange);
+        Vector3 direction = (target.position - transform.position).normalized;
+
+        shotPrehab.transform.DORotateQuaternion(target.rotation, 1);
+        rb.AddForce(direction * shotVelocity, ForceMode.VelocityChange);
     }
 }
