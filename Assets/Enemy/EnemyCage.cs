@@ -6,6 +6,7 @@ public class EnemyCage : EnemyBase
 {
     [SerializeField]
     private GameObject[] people;
+
     [SerializeField]
     private GameObject destructive;
 
@@ -18,7 +19,7 @@ public class EnemyCage : EnemyBase
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
     protected override void DeathEffect(GameObject obj)

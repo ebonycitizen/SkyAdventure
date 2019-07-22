@@ -6,11 +6,13 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject targetRight;
+
     [SerializeField]
     private GameObject targetLeft;
 
     [SerializeField]
     private GameObject enemyMole;
+
     [SerializeField]
     private GameObject enemyPenguin;
 
@@ -19,9 +21,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField]
     private Transform[] penguinsSpawnPos;
-
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
