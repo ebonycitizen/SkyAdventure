@@ -25,6 +25,11 @@ public class PlayerController2D : MonoBehaviour
     private RaycastHit2D hit;
     private Vector3 direction;
 
+    private Rigidbody2D rb;
+
+    [SerializeField]
+    private float moveForceMultiplier;
+
     private int layerMask;//for enemy
     private void Awake()
     {
@@ -38,20 +43,18 @@ public class PlayerController2D : MonoBehaviour
 
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateLine();
+       // UpdateLine();
         Move();
     }
     private void UpdateLine()
     {
-        lineRenderer.SetPosition(0, linePosition.position);
-        lineRenderer.SetPosition(1, linePosition.position + transform.up * lineLength-new Vector3(0,0,3.0f));
-    }
+         }
 
     private void Shot(GameObject target)
     {
@@ -64,11 +67,15 @@ public class PlayerController2D : MonoBehaviour
     private GameObject AimTarget()
     {
         hit = Physics2D.Raycast(transform.position, transform.up, lineLength, layerMask);
+        lineRenderer.SetPosition(0, linePosition.position);
+
 
         if (hit.collider)
         {
+            lineRenderer.SetPosition(1, hit.transform.position - new Vector3(0, 0, 3.0f));
             return hit.collider.gameObject;
         }
+        lineRenderer.SetPosition(1, linePosition.position + transform.up * lineLength - new Vector3(0, 0, 3.0f));
         return null;
     }
     private IEnumerator StartShot()
@@ -87,17 +94,26 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    private void Move()
+    private void FixedUpdate()
     {
 
         float h1 = Input.GetAxis("Horizontal");
         float v1 = Input.GetAxis("Vertical");
 
+        rb.AddForce(moveForceMultiplier * (new Vector2(h1, v1) * moveSpeed - rb.velocity));
+
+    }
+    private void Move()
+    {
+
+        //float h1 = Input.GetAxis("Horizontal");
+        //float v1 = Input.GetAxis("Vertical");
+
         float h2 = Input.GetAxis("Horizontal2");
         float v2 = Input.GetAxis("Vertical2");
 
-        Vector3 vec = new Vector3(h1, v1) * moveSpeed * Time.deltaTime;
-        transform.position += vec;
+        //Vector3 vec = new Vector3(h1, v1) * moveSpeed * Time.deltaTime;
+        //transform.position += vec;
 
         if (h2 != 0 || v2 != 0)
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(v2, h2) * Mathf.Rad2Deg - 90);
