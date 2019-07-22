@@ -21,7 +21,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Movement
         public override void OnStart()
         {
             base.OnStart();
-
+            
             targetPosition = target.Value.transform.position;
             SetDestination(Target());
         }

@@ -1,0 +1,31 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class TurtleAnimator : MonoBehaviour
+{
+    [SerializeField] private Animator animator;
+
+    [SerializeField] private NavMeshAgent agent;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (agent.velocity.magnitude > 1)
+        {
+            animator.SetBool("startRun",true);
+        }
+        else
+        {
+            animator.SetBool("startRun", false);
+        }
+        Debug.Log(agent.velocity);
+    }
+}
