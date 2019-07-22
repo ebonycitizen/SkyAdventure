@@ -12,7 +12,8 @@ TagManager:
   - Transformer
   - People
   - Bullet
-  - Rescue
+  - Collect
+  - WirePoint
   layers:
   - Default
   - TransparentFX

@@ -32,7 +32,7 @@ public class Chicken : MonoBehaviour
         if (gameObject.layer != LayerMask.NameToLayer("People"))
             return;
 
-        if (other.gameObject.tag == "Rescue")
+        if (other.gameObject.tag == "Collect")
         {
             target = other.transform;
             StartCoroutine("MoveToTarget");
@@ -41,7 +41,9 @@ public class Chicken : MonoBehaviour
 
     private IEnumerator MoveToTarget()
     {
-        transform.DOScale(transform.lossyScale * 0.3f, 1.5f);
+        GetComponent<Collider>().enabled = false;
+
+        transform.DOScale(1.5f, 1.5f);
         while(Vector3.Distance(target.position, transform.position) > stopDistance)
         {
             Vector3 velocity = (target.position - transform.position).normalized * speed * Time.deltaTime;
