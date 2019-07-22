@@ -18,7 +18,6 @@ public class EnemyPenguin : EnemyBase
     [SerializeField]
     private Transform bulletPos;
 
-
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -54,7 +53,7 @@ public class EnemyPenguin : EnemyBase
                     yield return null;
 
                 GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
-                bullet.GetComponent<Bullet>().Init(target.position-transform.position);
+                bullet.GetComponent<Bullet>().Init(target.position - transform.position);
             }
             yield return new WaitForSeconds(shotIntervalSec);
         }

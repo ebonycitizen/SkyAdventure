@@ -9,6 +9,7 @@ public class EnemyBlock : MonoBehaviour
     private void Awake()
     {
         enemies = new GameObject[transform.childCount];
+
         for (int i = 0; i < enemies.Length; i++)
         {
             enemies[i] = transform.GetChild(i).gameObject;
