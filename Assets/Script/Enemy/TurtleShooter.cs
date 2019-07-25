@@ -11,16 +11,15 @@ public class TurtleShooter : MonoBehaviour
 
     [SerializeField] private GameObject shotEffect;
 
-    [SerializeField] private Transform target;
-
     [SerializeField] private float shotVelocity = 15f;
+
+    private Transform target;
 
     public void Shoot(GameObject _target)
     {
         target = _target.transform;
         StartCoroutine(InShooting());
     }
-
     IEnumerator InShooting()
     {
         shotEffect.GetComponent<ParticleSystem>().Play();
