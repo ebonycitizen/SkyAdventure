@@ -25,7 +25,7 @@ public class TurtleAnimator : MonoBehaviour
     {
         isRotating = (bool)rotate.GetVariable("IsRotating").GetValue();
 
-        Debug.Log("isRotating"+ isRotating);
+
 
         if (agent.velocity.magnitude > 1||isRotating)
         {
