@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Chicken : MonoBehaviour
+public class Key : MonoBehaviour
 {
     [SerializeField]
     private float speed;
@@ -53,7 +53,37 @@ public class Chicken : MonoBehaviour
         }
         transform.parent = target;
 
+        FindObjectOfType<ClearPoint>().OnCollectKey();
+
         yield return null;
         GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    public void MoveToClearPoint(Transform target)
+    {
+        StartCoroutine("MoveToClear", target);
+    }
+
+    private IEnumerator MoveToClear(Transform target)
+    {
+        gameObject.layer = LayerMask.NameToLayer("Default");
+        transform.parent = target;
+        transform.DOScale(10f, 0.5f);
+
+        float range = 5;
+        float x = Random.Range(target.position.x - range, target.position.x + range);
+        float y = Random.Range(target.position.y - range, target.position.y + range);
+        float z = Random.Range(target.position.z - range, target.position.z + range);
+
+        Vector3 targetPos = new Vector3(x, y, z);
+
+        while (Vector3.Distance(targetPos, transform.position) > stopDistance)
+        {
+            Vector3 velocity = (targetPos - transform.position).normalized * speed * 2 * Time.deltaTime;
+            transform.position += velocity;
+
+            yield return null;
+        }
+        
     }
 }

@@ -31,7 +31,7 @@ public class EnemyBase : MonoBehaviour
         bulletLimit = maxHP;
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Bullet")
         {

@@ -9,6 +9,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float distToMove;
 
+    [SerializeField]
+    private float value;
+
     private Vector3 oldPosition;
 
     void Start()
@@ -21,7 +24,7 @@ public class PlayerMove : MonoBehaviour
         float diff = (camera.position - oldPosition).magnitude;
         Vector3 direction = (camera.position - oldPosition).normalized;
         if (diff > distToMove)
-            transform.position += direction * (diff / 2);
+            transform.position += direction * (diff / value);
 
         oldPosition = camera.position;
     }
