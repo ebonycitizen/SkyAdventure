@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class Wire : MonoBehaviour
 {
     [SerializeField]
     private Grab grab;
+    [SerializeField]
+    private SteamVR_Action_Boolean grabAction;
     [SerializeField]
     private Transform wireStart;
     [SerializeField]
@@ -36,10 +39,10 @@ public class Wire : MonoBehaviour
         UpdateCableLength();
 
         //グーしたらワイヤー出す
-        if (grab.HasGrab())
+        if (grab.HasGrab() || grabAction.GetStateDown(SteamVR_Input_Sources.RightHand))
             StartCoroutine("Shot");
 
-        if (attachTarget != null) 
+        if (attachTarget != null)
         {
             //距離長すぎるとワイヤーを切る
             float dis = Vector3.Distance(wireEnd.position, transform.position);
@@ -47,7 +50,7 @@ public class Wire : MonoBehaviour
                 StartCoroutine("Release");
 
             //パーしたらギミック発動+ワイヤーポイント消す
-            if (grab.HasRelease())
+            if (grab.HasRelease() || grabAction.GetStateUp(SteamVR_Input_Sources.RightHand))
             {
                 attachTarget.parent.GetComponentInChildren<DestrcutiveObject>().Excute();
                 StartCoroutine("Release");
