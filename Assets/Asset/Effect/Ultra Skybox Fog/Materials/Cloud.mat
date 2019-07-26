@@ -24,7 +24,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex:
-        m_Texture: {fileID: 8900000, guid: 6939f8161e0932c40871408aebe0e285, type: 3}
+        m_Texture: {fileID: 8900000, guid: 41783307f8f86724fbf7f34f90189d0c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -32,7 +32,7 @@ Material:
     - _Exposure: 1
     - _FogBottom: 1
     - _FogEnd: 0.5
-    - _FogIntens: 1
+    - _FogIntens: 0.7
     - _FogStart: 0
     - _MieIntens: 0.935
     - _MieSize: 0
