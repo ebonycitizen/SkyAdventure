@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestrcutiveObject : MonoBehaviour
+public class DestrcutiveObject : GimmickBase
 {
     [SerializeField]
     private ParticleSystem deadEffect;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class DestrcutiveObject : MonoBehaviour
         
     }
 
-    public void Excute()
+    protected override void DeathEffect()
     {
         StartCoroutine("Destroy");
     }
@@ -28,11 +28,13 @@ public class DestrcutiveObject : MonoBehaviour
     {
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
+        Destroy(attachTarget);
 
         deadEffect.Play();
 
         yield return new WaitWhile(() => deadEffect.isPlaying == true);
 
         Destroy(gameObject);
+        
     }
 }

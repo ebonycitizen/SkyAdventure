@@ -39,7 +39,7 @@ public class Wire : MonoBehaviour
         UpdateCableLength();
 
         //グーしたらワイヤー出す
-        if (grab.HasGrab() || grabAction.GetStateDown(SteamVR_Input_Sources.RightHand))
+        if (grab.HasGrab() || grabAction.stateDown)
             StartCoroutine("Shot");
 
         if (attachTarget != null)
@@ -50,11 +50,11 @@ public class Wire : MonoBehaviour
                 StartCoroutine("Release");
 
             //パーしたらギミック発動+ワイヤーポイント消す
-            if (grab.HasRelease() || grabAction.GetStateUp(SteamVR_Input_Sources.RightHand))
+            if (grab.HasRelease() || grabAction.stateUp)
             {
-                attachTarget.parent.GetComponentInChildren<DestrcutiveObject>().Excute();
+                attachTarget.parent.GetComponentInChildren<GimmickBase>().Excute();
                 StartCoroutine("Release");
-                Destroy(attachTarget.gameObject);
+                //Destroy(attachTarget.gameObject);
             }
         }
     }
